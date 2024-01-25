@@ -1,13 +1,15 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const TodoTask = require("../models/TodoTask");
-const CompleteTask = require("../models/CompletedTask.js")
-const PendingTask = require("../models/PendingTask")
+const CompleteTask = require("../models/CompletedTask.js");
+const PendingTask = require("../models/PendingTask");
+require("dotenv").config();
 
 async function connecttodb() {
+  const connectionUrl = process.env.MONGO_CONNECTION_URL || "mongodb://localhost:27017/todoBackend";
   mongoose.set("strictQuery", true);
   mongoose
-    .connect(`mongodb://localhost:27017/todoBackend`)
+    .connect(connectionUrl)
     .then((con) => console.log(`Database connected: ${con.connection.host}`))
     .catch((err) => console.log(err));
 }
@@ -35,12 +37,18 @@ const findTodotask = async (userId) => {
 const findCompleteTask = async (userId) => {
   connecttodb();
   return await CompleteTask.findOne({ userId });
-}
+};
 const findPendingTask = async (userId) => {
   connecttodb();
   return await PendingTask.findOne({ userId });
-}
-const createTodoTask = async (userId, priority, description, title, dueDate) => {
+};
+const createTodoTask = async (
+  userId,
+  priority,
+  description,
+  title,
+  dueDate
+) => {
   connecttodb();
   return await TodoTask.create({
     userId,
@@ -48,7 +56,13 @@ const createTodoTask = async (userId, priority, description, title, dueDate) => 
   });
 };
 
-const createCompletedTask = async (userId, priority, description, title, dueDate) => {
+const createCompletedTask = async (
+  userId,
+  priority,
+  description,
+  title,
+  dueDate
+) => {
   connecttodb();
   return await CompleteTask.create({
     userId,
@@ -56,7 +70,13 @@ const createCompletedTask = async (userId, priority, description, title, dueDate
   });
 };
 
-const createPendingTask = async (userId, priority, description, title, dueDate) => {
+const createPendingTask = async (
+  userId,
+  priority,
+  description,
+  title,
+  dueDate
+) => {
   connecttodb();
   return await PendingTask.create({
     userId,
@@ -72,5 +92,5 @@ module.exports = {
   findCompleteTask,
   createCompletedTask,
   findPendingTask,
-  createPendingTask
+  createPendingTask,
 };
