@@ -9,7 +9,7 @@ const PendingTask = require("../models/PendingTask")
 async function connecttodb() {
   mongoose.set("strictQuery", true);
   mongoose
-    .connect(`mongodb://localhost:27017/Swym`)
+    .connect(`mongodb://localhost:27017/todoBackend`)
     .then((con) => console.log(`Database connected: ${con.connection.host}`))
     .catch((err) => console.log(err));
 }
