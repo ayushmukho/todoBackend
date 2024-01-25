@@ -5,8 +5,8 @@ const swaggerUi = require("swagger-ui-express");
 const YAML = require("yamljs");
 const swaggerDocument = YAML.load("./src/api/swagger/swagger.yaml");
 const SwaggerExpress = require("swagger-express-mw");
-const config = require("config");
 const authCheck = require('./src/helper/auth');
+require('dotenv').config()
 
 let dirConfig = {
   appRoot: __dirname + "/src", // required config
@@ -45,7 +45,7 @@ SwaggerExpress.create(dirConfig, function (err, swaggerExpress) {
   };
 
   swaggerExpress.register(app);
-  let port = config.has("port") ? config.get("port") : 5678;
+  let port = process.env.PORT ? process.env.PORT : 5678;
   app.use('/', swaggerUi.serveFiles(swaggerDocument, options), swaggerUi.setup(swaggerDocument, options));
   app.use(cors);
   app.listen(port, () => {

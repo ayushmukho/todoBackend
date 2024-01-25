@@ -1,5 +1,3 @@
-const { MongoClient, ObjectId } = require("mongodb");
-const config = require("config");
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const TodoTask = require("../models/TodoTask");
