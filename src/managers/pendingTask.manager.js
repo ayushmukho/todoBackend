@@ -29,7 +29,7 @@ const addToPendingtask = async (todoTaskId, userDetails) => {
     throw { error: "Error in adding the details in the complete task manager" };
   }
 };
-const getPendingTasks = async () => {
+const getPendingTasks = async (userDetails) => {
 	try {
     return await dal.findPendingTask(userDetails.id);
   } catch (error) {
