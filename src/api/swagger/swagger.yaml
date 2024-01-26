@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  title: Sample NodeJS API
+  title: Task Manager API
   description: Optional multiline or single-line description
   version: 0.1.9
 basePath: "/v2"
@@ -113,6 +113,33 @@ paths:
           description: "Fetched all Todo"
         "404":
           description: "Bad Requests"
+        "401":
+          description: "Unauthorized"
+        "500":
+          description: "Internal Server Error"
+    delete:
+      tags:
+        - "Tasks"
+      summary: "Add all the required task to be done"
+      operationId: "removeTodoTask"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Remove Task using taskId"
+          required: true
+          schema:
+            $ref: "#/definitions/DeleteTask"
+      security:
+        - basicJwtAuth: []
+      responses:
+        "201":
+          description: "User Successfully Deleted"
+        "404":
+          description: "User Already Exists"
         "401":
           description: "Unauthorized"
         "500":
@@ -264,6 +291,14 @@ definitions:
       dueDate:
         type: string
         format: date
+
+  DeleteTask:
+    type: object
+    required: 
+      - taskId
+    properties:
+      taskId:
+        type: string
 
   CompleteTask:
     type: object

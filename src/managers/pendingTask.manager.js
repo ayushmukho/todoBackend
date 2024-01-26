@@ -17,10 +17,9 @@ const addToPendingtask = async (todoTaskId, userDetails) => {
           taskItems.dueDate,
           userDetails.id
         );
-        todoTaskDetails.todoTasks.splice(
-          todoTaskDetails.todoTasks.findIndex((task) => task._id === todoTaskId),
-          1
-        );
+
+        await dal.removeTodoTask(userDetails.id, todoTaskId)
+        
         todoTaskDetails = await todoTaskDetails.save();
         return detailsCompleteTask;
       }

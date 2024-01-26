@@ -18,10 +18,8 @@ const addCompleteTask = async (taskId, userDetails) => {
         dueDate = taskItems.dueDate;
         id = userDetails.id;
 
-        todoTaskDetails.todoTasks.splice(
-          todoTaskDetails.todoTasks.findIndex((task) => task._id === taskId),
-          1
-        );
+        await dal.removeTodoTask(userDetails.id, taskId);
+        
         todoTaskDetails = await todoTaskDetails.save();
       } else {
         let itemPendingIndex = pendingTaskDetails.pendingTasks.findIndex(
@@ -36,12 +34,13 @@ const addCompleteTask = async (taskId, userDetails) => {
           dueDate = taskItems.dueDate;
           id = userDetails.id;
 
-          pendingTaskDetails.pendingTasks.splice(
-            pendingTaskDetails.pendingTasks.findIndex(
-              (task) => task._id === taskId
-            ),
-            1
-          );
+          // pendingTaskDetails.pendingTasks.splice(
+          //   pendingTaskDetails.pendingTasks.findIndex(
+          //     (task) => task._id === taskId
+          //   ),
+          //   1
+          // );
+          await dal.removePendingTask(userDetails.id, taskId);
           pendingTaskDetails = await pendingTaskDetails.save();
         }
       }

@@ -53,7 +53,24 @@ const getTodoTasks = async (userDetails) => {
     throw { error: "Error in getting todo tasks in task manager" };
   }
 };
+const removeTodoTask = async (userDetails, taskId) => {
+  try {
+    let todoTaskDetails = await dal.findTodotask(userDetails.id);
+    if (todoTaskDetails) {
+      let itemIndex = todoTaskDetails.todoTasks.findIndex(
+        (task) => task._id == taskId
+      );
+      if (itemIndex > -1) {
+        const removedData = await dal.removeTodoTask(userDetails.id, taskId);
+        return removedData;
+      }
+    }
+  } catch (error) {
+    throw { error: "Error in removing todo tasks in task manager" };
+  }
+};
 module.exports = {
   addTodoTask,
   getTodoTasks,
+  removeTodoTask,
 };

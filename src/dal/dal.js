@@ -34,6 +34,20 @@ const findTodotask = async (userId) => {
   connecttodb();
   return await TodoTask.findOne({ userId });
 };
+const removeTodoTask = async (userId, taskId) => {
+  connecttodb();
+  return await TodoTask.updateOne(
+    { userId: userId },
+    { $pull: { todoTasks: { _id: taskId } } }
+  );
+};
+const removePendingTask = async (userId, taskId) => {
+  connecttodb();
+  return await PendingTask.updateOne(
+    { userId: userId },
+    { $pull: { pendingTasks: { _id: taskId } } }
+  );
+};
 const findCompleteTask = async (userId) => {
   connecttodb();
   return await CompleteTask.findOne({ userId });
@@ -80,7 +94,7 @@ const createPendingTask = async (
   connecttodb();
   return await PendingTask.create({
     userId,
-    completedTasks: [{ title, priority, description, dueDate }],
+    pendingTasks: [{ title, priority, description, dueDate }],
   });
 };
 
@@ -93,4 +107,6 @@ module.exports = {
   createCompletedTask,
   findPendingTask,
   createPendingTask,
+  removeTodoTask,
+  removePendingTask
 };
