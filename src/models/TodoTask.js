@@ -11,7 +11,10 @@ const todoTasksSchema = new mongoose.Schema(
           title: String,
           priority: Number,
           description: String,
-          dueDate: Date
+          dueDate: Date,
+        },
+        {
+          timestamps: true,
         }
       ),
     ],

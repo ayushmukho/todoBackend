@@ -12,6 +12,9 @@ const completedTaskSchema = new mongoose.Schema(
           priority: Number,
           description: String,
           dueDate: Date
+        },
+        {
+          timestamps: true,
         }
       ),
     ],

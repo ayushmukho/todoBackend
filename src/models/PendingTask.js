@@ -6,12 +6,17 @@ const pendingTaskSchema = new mongoose.Schema(
       ref: "User",
     },
     pendingTasks: [
-      new mongoose.Schema({
-        title: String,
-        priority: Number,
-        description: String,
-        dueDate: Date,
-      }),
+      new mongoose.Schema(
+        {
+          title: String,
+          priority: Number,
+          description: String,
+          dueDate: Date,
+        },
+        {
+          timestamps: true,
+        }
+      ),
     ],
   },
   {
