@@ -120,7 +120,7 @@ paths:
     delete:
       tags:
         - "Tasks"
-      summary: "Add all the required task to be done"
+      summary: "Remove all todoTask for the users"
       operationId: "removeTodoTask"
       consumes:
         - "application/json"
@@ -198,7 +198,7 @@ paths:
     post:
       tags:
         - "Tasks"
-      summary: "Add all to the complete task"
+      summary: "Add all to the pending task"
       operationId: "addToPendingtask"
       consumes:
         - "application/json"
