@@ -102,8 +102,7 @@ Start the server
   npm run dev
 ```
 
-
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+<img width="1430" alt="Screenshot 2024-01-27 at 3 10 35 PM" src="https://github.com/ayushmukho/todoBackend/assets/52779201/c7872a04-b8e0-4cd9-ac17-1084ac1d8772">
 
